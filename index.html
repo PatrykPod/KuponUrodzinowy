@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <meta name="robots" content="noindex, nofollow">
+    <title>Karta podarunkowa dla Olci</title>
+
+    <base href="index.html" target="_self">
+
+    <meta name="subject" content="Prezent Olci">
+    <meta name="description" content="Karta podarunkowa dla Olci">
+    <meta name="author" content="Patryk & Jessi">
+
+    <!-- <link href="card.css" rel="stylesheet"> -->
+    <style>
+        body, html {
+        height: 100%;
+        padding:0;
+        margin:0;
+        overflow:hidden;
+        }
+
+        .main {
+        height: 100%;
+        width: 100%;
+        }
+        /* .coupon, */
+        .terms,
+        .giftcard {
+        position: absolute;
+        /* background-color:lightgrey; */
+        width: 90vw;
+        height: 70vh;
+        top: 15vh;
+        left: 5vw;
+        }
+
+        .coupon {
+        background-color:transparent;
+        /* background: url("coupon.jpg"); */
+        background-size: cover;
+        z-index:7;
+        }
+        .terms {
+        /* background-color:lightblue; */
+        }
+        .giftcard {
+        z-index:3;
+        }
+
+        .coupon-wrapper {
+        width: 100vw;
+        height: 100vh;
+        margin:0;
+        padding:0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top:0;
+        left:0;
+        }
+
+        .coupon {
+        width: 1010px;
+        height:502px;
+        position: relative;
+        }
+
+        .coupon .left,
+        .coupon .right {
+        width: 49.5%;
+        height: 100%;
+        background-size: cover;
+        display: inline-block;
+        }
+        .coupon .left {
+        background-position: left;
+        background: url("coupon-l.png");
+        background-repeat: no-repeat;
+        }
+        .coupon .right {
+        background: url("coupon-r.png");
+        background-position: right;
+        background-repeat: no-repeat;
+        }
+
+        .left-animation {
+        transform: rotate(-180deg);
+        transition: transform .75s linear;
+        transform-origin: bottom right;
+        transform-style: preserve-3D;
+        }
+        .right-animation {
+        transform: rotate(180deg);
+        transition: transform .55s linear;
+        transform-origin: bottom left;
+        transform-style: preserve-3D;
+        }
+
+        .left-dropdown {
+        left: -100vw;
+        top: 100vh;
+        transition-delay: .8s;
+        transition: all 0.85s ease-in-out;
+        }
+        .right-dropdown {
+        position: relative;
+        margin-right: -100vw;
+        margin-top: 100vh;
+        transition-delay: .65s;
+        transition: all 0.85s ease-in-out;
+        }
+
+        .cut-button {
+        position: absolute;
+        cursor: pointer;
+        top: 10%;
+        left: 50%;
+        transform: rotate(90deg) translateX(-50%);
+        width:150px;
+        height: 50px;
+        }
+        .cut-button img {
+        width: 100%;
+        }
+        .cut-button-opacity {
+        opacity:0;
+        transition: opacity .7s ease;
+        }
+
+
+
+
+        .terms {
+        position: absolute;
+        top:0;
+        left:0;
+        width: 100%;
+        height: 100%;
+        filter: blur(15px);
+        background: url("https://images.unsplash.com/photo-1471286274405-579f8d7132d8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9");
+        background-size: cover;
+        background-repeat: no-repeat;
+        transition: filter .75s ease-in;
+        z-index: 5;
+        }
+
+        .terms-content {
+        width: 85vw;
+        margin-left: 7.5vw;
+        margin-top: 7.5vh;
+        overflow-y: scroll;
+        background: #ffffffba;
+        border: 1px solid lightgrey;
+        -webkit-box-shadow: 0px 0px 24px 2px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 24px 2px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 24px 2px rgba(0,0,0,0.75);
+        font-size: 1.75em;
+        padding: 30px 20px;
+        box-sizing: border-box;
+        height: calc(100% - 12vh);
+        }
+
+        .terms-title {
+        text-align: center;
+        }
+        .terms-terms {
+        padding: 0 25px;
+        }
+        .terms-terms ul {
+        list-style-type: none;
+        }
+
+        .blur-off {
+        filter: blur(0);
+        transition: filter .75s ease;
+        }
+
+        .opacity-off {
+        transition: opacity 1s ease-out;
+        opacity: 0;
+        }
+    </style>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const leftCard = document.getElementById("left"),
+        rightCard = document.getElementById("right"),
+        coupon = document.getElementById("coupon"),
+        terms = document.getElementById("terms"),
+        scisors = document.getElementById("cut-button");   
+    
+        scisors.addEventListener("click", function() {
+            setTimeout(function() {
+                leftCard.classList.add("left-animation");
+                rightCard.classList.add("right-animation");
+            }, 250);
+        
+            scisors.classList.add("cut-button-opacity");
+        
+            setTimeout(function() {
+                tornCoupon();
+            }, 300);
+            setTimeout(function() {
+                terms.classList.add("blur-off");
+            }, 375);
+            
+            setTimeout(function() {
+                coupon.parentNode.removeChild(coupon);
+            }, 1200);
+        });
+        
+        function tornCoupon() {
+            leftCard.classList.add("left-dropdown");
+            rightCard.classList.add("right-dropdown");
+        } 
+    });
+    </script>
+</head>
+
+<body>
+    <main>
+        <div class="page-content">
+            <div class="coupon-wrapper">
+                <div id="coupon" class="coupon">
+                    <div id="cut-button" class="cut-button">
+                        <img src="scisors.png" alt="Przetnij Kupon" />
+                    </div>
+                    <div class="left" id="left"></div><div id="right" class="right"></div>
+                </div>
+            </div>
+            
+            <div id="terms" class="terms">
+                <div class="terms-content">
+                    <h1 class="terms-title">Regulamin uzyskania prezentu urodzinowego Olci</h1>
+                    <div class="terms-terms">
+                        <ul>
+                            <li class="terms-item">
+                                <h3 class="term-tit">1. Warunki ogólne</h3>
+                                <div class="terms-cont">
+                                    <p>Poniższy Regulamin dotyczy wszystkich zamówień złożonych przez Solenizantkę („Ty”, „Ciebie”) u Najstarszej Siostry poprzez aplikację Messanger, na stronie dla urządzeń mobilnych lub za pośrednictwem aplikacji mobilnej, bądź telefonicznie. Dopuszczalne jest także składanie próśb o prezent osobiście. Obowiązuje wtedy przesłanie linka do prezentu poprzez wyzej wspomniane formy komunikacji.</p>
+                                    <p>Korzystając z możliwości zamówienia prezentu, akceptujesz niniejszy Regulamin („Regulamin”). Przed złożeniem zamówienia zapoznaj się z treścią Regulaminu.</p>
+                                    <p>Zamówienia mogą być składane jedynie przez osoby fizyczne nieprowadzące działalności gospodarczej, które ukończyły 18 lat, nie są pod opieką prawną opiekuna oraz podają adres dostawy na terenie Polski.</p>
+                                    <p>Dostępność produktów i usług w internecie i sklepach stacjonarnych w danym momencie nie wskazuje ani nie jest gwarancją, że te produkty i usługi będą dostępne zawsze. Zastrzegamy sobie prawo do wycofania ze sprzedaży dowolnego produktu w każdym momencie.</p>
+                                    <p>W gestii Solenizantki jest sprawdzenie dostępności zamawianego prezentu.
+                                        Solenizantkę obowiązuje wersja Regulaminu dostępna w tym pliku w momencie składania zamówienia.</p>                                      
+                                </div>
+                            </li>
+                            <li class="terms-item">
+                                <h3 class="term-tit">2. Ceny i koszty dostawy</h3>
+                                <div class="terms-cont">
+                                    <p>Ceny wyświetlane w internecie i w sklepach stacjonarnych zawierają ustawowy podatek VAT, ale nie zawierają kosztów dostawy.</p>
+                                    <p>Koszty dostawy ponosi Najstarsza Siostra. Prosimy jednak ze względu na portfelowe ograniczenia, mieć na uwadze koszty dostawy tak, aby nie wynosiły one miliony monet, bo spłoniesz nim odpalę lont. Nie zamawiamy prezentów, których cena przekracza koszty wysyłki.</p>
+                                </div>
+                            </li>
+                            <li class="terms-item">
+                                <h3 class="term-tit">3. Składanie zamówień/zakończenie umowy</h3>
+                                <div class="terms-cont">
+                                    <p>Zamówienia można składać osobiście, za pomocą messangera lub telefonicznie. Więcej informacji znajduje się na stronach Obsługi Klienta.</p>
+                                    <p>Jeśli podasz swój adres e-mail, po złożeniu zamówienia otrzymasz wiadomość e-mail z potwierdzeniem zamówienia. Jeśli z jakiegokolwiek powodu nie będziemy mogli zrealizować zamówienia, poinformujemy Cię o tym najszybciej, jak to możliwe. </p>
+                                </div>
+                            </li>
+                            <li class="terms-item">
+                                <h3 class="term-tit">4. Rezygnacja z zamówienia</h3>
+                                <div class="terms-cont">
+                                    <p>Możesz anulować Prezent lub zrezygnować z niego w ciągu 30 dni od momentu odbioru przesyłki. </p>
+                                    <p>Jeśli chcesz anulować lub zwrócić swoje zamówienie, poinformuj nas o tym pisemnie.</p>
+                                    <p>Jeśli otrzymany produkt jest wadliwy, jak najszybciej poinformuj o tym Starszą Siostrę i zwróć go zgodnie ze wskazówkami zawartymi w punkcie 6 (Zwroty) poniżej. </p>
+                                </div>
+                            </li>
+                            <li class="terms-item">
+                                <h3 class="term-tit">5. Wartość prezentu</h3>
+                                <div class="terms-cont">
+                                    <p>Wartość Prezentu ustalona zostaje na <h2>150zł</h2></p>
+                                    <p>Do kwoty tej nie wlicza się kosztów dostawy z pkt. 2 tego Regulaminu.</p>
+                                </div>
+                            </li>
+                            <li class="terms-item">
+                                <h3 class="term-tit">6. Kolory i wymiary</h3>
+                                <div class="terms-cont">
+                                    <p>Dokładamy starań, aby możliwie wiernie prezentować nasze produkty, ich skład i kolory. Sposób wyświetlania koloru zależy od używanego systemu operacyjnego i sprzętu. Nie możemy zagwarantować, że Twój komputer, monitor lub urządzenie mobilne wiernie odwzoruje kolory.</p>
+                                    <p>Wymiary produktu podane w internecie są jedynie orientacyjne i mają ułatwić wybór modelu lub fasonu, ale nie są rzeczywistymi wymiarami produktu, który otrzymasz. Wymiary rzeczywiste mogą się różnić zależnie od materiału, z którego wykonano produkt.</p>
+                                </div>
+                            </li>
+                            <li class="terms-item">
+                                <h3 class="term-tit">7. Rozdzielność postanowień</h3>
+                                <div class="terms-cont">
+                                    <p>Jeśli jakakolwiek część niniejszego Regulaminu zostanie uznana za niedozwoloną lub nieważną przez jakikolwiek sąd lub urząd regulacji, jego pozostałe zapisy nadal będą obowiązywać.</p>
+                                </div>
+                            </li>
+                            <li class="terms-item">
+                                <h3 class="term-tit">8. Własność praw</h3>
+                                <div class="terms-cont">
+                                    <p>Wszystkie prawa własności intelektualnej, takie jak znaki towarowe i symbole praw autorskich należą do Najstarszej Siostry.</p>
+                                </div>
+                            </li>
+                            <li class="terms-item">
+                                <h3 class="term-tit">9. Dane firmy</h3>
+                                <div class="terms-cont">
+                                    <p>Jessica Kufa</p>
+                                    <p>Najstarsza Siostra .pl</p>
+                                    <p></p>536272470</p>
+                                    <p>jessicakufa@gmail.com</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="giftcard"></div> -->
+        </div>
+        
+    </main>
+
+    <!-- <script src="card.js"></script> -->
+</body>
+
+</html>
